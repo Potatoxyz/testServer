@@ -25,9 +25,16 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+server.listen(port,starCallback(port));
 server.on('error', onError);
 server.on('listening', onListening);
+
+/**
+启动成功
+*/
+function starCallback(port) {
+    console.info("程序启动成功，端口号："+port);
+}
 
 /**
  * Normalize a port into a number, string, or false.
