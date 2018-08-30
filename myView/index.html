@@ -3,8 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <title>index</title>
+    <link href="https://cdn.bootcss.com/blueimp-file-upload/9.21.0/css/jquery.fileupload.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.css" rel="stylesheet">
 </head>
+<style>
+    #progress .progress-bar{
+        transition: all ease 0.5s;
+    }
+</style>
 <body>
-<h2>{{title}}</h2>
+<input id="fileupload" type="file" name="uploadForm" multiple>
+<div id="progress">
+    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/blueimp-file-upload/9.21.0/js/vendor/jquery.ui.widget.min.js"></script>
+<script src="https://cdn.bootcss.com/blueimp-file-upload/9.21.0/js/jquery.iframe-transport.min.js"></script>
+<script src="https://cdn.bootcss.com/blueimp-file-upload/9.21.0/js/jquery.fileupload.min.js"></script>
+<script>
+    $(function () {
+        $('#fileupload').fileupload({
+            dataType: 'json',
+            url:'http://localhost:3001/test/upload',
+            /**
+             默认类型是put
+            */
+            type:'POST',
+            /**
+            上传进度
+            */
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('#progress .progress-bar').css(
+                    'width',
+                    progress + '%'
+                );
+            },
+            /**
+             * 上传成功之后的回调
+            */
+            done: function (e, data) {
+                console.log(data.result);
+                $.each(data.result.Content, function (index, file) {
+                    $('<p/>').text(file.filename).appendTo(document.body);
+                });
+            },
+            /**
+             * 上传失败之后的回调
+             */
+            fail:function (e,data) {
+                console.log(data.jqXHR.statusText)
+            }
+        });
+    });
+</script>
 </body>
 </html>

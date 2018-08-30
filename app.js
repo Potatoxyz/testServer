@@ -7,8 +7,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var test = require('./routes/test');
-
+var test = require('./routes/test.route');
 var app = express();
 //自定义配置
 app.all('*', function(req, res, next) {
@@ -25,7 +24,7 @@ app.set('views', path.join(__dirname, 'myView'));
 
 //更换模板引擎
 // app.set('view engine', 'jade');
-app.engine('html', require('express-art-template'))
+app.engine('html', require('express-art-template'));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
