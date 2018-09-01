@@ -24,7 +24,7 @@ app.set('views', path.join(__dirname, 'myView'));
 
 //更换模板引擎
 // app.set('view engine', 'jade');
-app.engine('.html', require('express-art-template'));
+app.engine('html', require('express-art-template'));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
