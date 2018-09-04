@@ -5,9 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
-var test = require('./routes/test.route');
+var uploadPage = require('./routes/pages/upload');
+var server = require('./routes/server/server');
 var app = express();
 //自定义配置
 app.all('*', function(req, res, next) {
@@ -19,11 +18,13 @@ app.all('*', function(req, res, next) {
     {res.status(200).send('');}/*让options请求快速返回*/
     else  {next()}
 });
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'myView'));
 
-//更换模板引擎
 // app.set('view engine', 'jade');
+//更换模板引擎
 app.engine('html', require('express-art-template'));
 
 // uncomment after placing your favicon in /public
@@ -34,9 +35,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
-app.use('/test', test);
+/**
+配置路径
+*/
+app.use('/', uploadPage);
+app.use('/server', server);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
