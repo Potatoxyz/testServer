@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var uploadPage = require('./routes/pages/upload');
+var index = require('./routes/pages/index');
 var server = require('./routes/server/server');
 var app = express();
 //自定义配置
@@ -38,7 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 /**
 配置路径
 */
-app.use('/', uploadPage);
+app.use('/', index);
 app.use('/server', server);
 
 // catch 404 and forward to error handler
