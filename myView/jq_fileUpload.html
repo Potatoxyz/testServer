@@ -8,6 +8,7 @@
     <link href="https://cdn.bootcss.com/blueimp-file-upload/9.21.0/css/jquery.fileupload.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/blueimp-file-upload/9.21.0/css/jquery.fileupload-ui.min.css" rel="stylesheet">
     <link rel="stylesheet" href="jq_fileupload/style.css">
+    <link rel="stylesheet" href="jq_fileupload/c-style.css">
 </head>
 <body>
 
@@ -49,7 +50,18 @@
             </div>
         </div>
         <!-- The table listing the files available for upload/download -->
-        <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+        <table role="presentation" class="table table-striped preview-table">
+            <thead>
+            <tr>
+                <th>图片预览</th>
+                <th>文件名</th>
+                <th>大小</th>
+                <th>进度</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody class="files"></tbody>
+        </table>
     </form>
 </div>
 
@@ -63,10 +75,13 @@
         </td>
         <td>
             <p class="name">{%=file.name%}</p>
+
+        </td>
+        <td>
+        <p class="size">Processing...</p>
             <strong class="error text-danger"></strong>
         </td>
         <td>
-            <p class="size">Processing...</p>
             <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
             <div class="progress-bar progress-bar-success" style="width:0%;"></div>
             </div>

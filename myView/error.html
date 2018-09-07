@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+    <link rel="stylesheet" href="stylesheets/error.css">
+</head>
+<body>
+<h1 class="error-title">404 页面没找到...</h1>
+<p class="zoom-area">请确保输入正确的Url地址</p>
+<section class="error-container">
+    <span class="four"><span class="screen-reader-text">4</span></span>
+    <span class="zero"><span class="screen-reader-text">0</span></span>
+    <span class="four"><span class="screen-reader-text">4</span></span>
+</section>
+<div class="link-container">
+    <a  href="javascript:;" class="more-link" id="back">返回</a>
+</div>
+<script>
+    window.onload=function () {
+        document.getElementById('back').addEventListener('click',function () {
+            window.history.back();
+        })
+    }
+</script>
+</body>
+</html>
