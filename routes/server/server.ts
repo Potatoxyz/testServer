@@ -4,6 +4,11 @@ var router = express.Router();
 var fs=require('fs');
 var path=require('path');
 var Util=require('../../utils/utils');
+
+//连接数据库配置
+const sql = require('mssql');
+var config=require('./database.config.js');
+var dataBase=require('./dataBase/dataBase');
 router.get('/', function(req, res, next) {
     res.send({success:'true'});
     res.status(200).end();
@@ -16,13 +21,11 @@ router.post('/goodCode', function(req, res, next) {
     res.send(r);
     res.status(200).end();
 });
-
 /**
  前端必须填写和后台相对应的字段名
 */
 var upload = multer({ dest: 'uploads/' }).single('uploadForm'); //上传单个文件 req.file
 // var upload = multer({ dest: 'uploads/' }).array('uploadForm'); //上传多个文件 req.files
-
 var uploadPath=path.resolve(__dirname,'../../uploads');
 router.post('/upload',function(req, res, next) {
     upload(req, res, function (err) {
@@ -49,6 +52,7 @@ router.post('/upload',function(req, res, next) {
     })
 
 });
+router.use('/dataBase',dataBase);
 module.exports = router;
 export class resModel{
     IsSuccess:boolean;

@@ -6,6 +6,10 @@ var router = express.Router();
 var fs = require('fs');
 var path = require('path');
 var Util = require('../../utils/utils');
+//连接数据库配置
+var sql = require('mssql');
+var config = require('./database.config.js');
+var dataBase = require('./dataBase/dataBase');
 router.get('/', function (req, res, next) {
     res.send({ success: 'true' });
     res.status(200).end();
@@ -48,6 +52,7 @@ router.post('/upload', function (req, res, next) {
         res.status(200).end();
     });
 });
+router.use('/dataBase', dataBase);
 module.exports = router;
 var resModel = (function () {
     function resModel() {
