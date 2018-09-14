@@ -1,3 +1,8 @@
 1.jq 上传预览
 
 2.mssql连接sql server 数据库
+
+3.log4js  运行日志
+trace、debug、info、warn、error、fatal 等级别
+例如：设置级别info，小于info的log.debug不会记录
+不配置category就是默认的appender

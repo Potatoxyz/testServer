@@ -1,0 +1,4 @@
+[2018-09-14T18:26:11.805] [INFO] cheese - ::1 - - "OPTIONS /server/upload HTTP/1.1" 200 0 "" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36"
+[2018-09-14T18:26:11.826] [INFO] cheese - undefined
+[2018-09-14T18:26:11.827] [INFO] cheese - undefined
+[2018-09-14T18:26:11.829] [INFO] cheese - ::1 - - "POST /server/upload HTTP/1.1" 200 221 "http://localhost:4300/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36"

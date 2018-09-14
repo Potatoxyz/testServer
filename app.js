@@ -4,14 +4,21 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var index = require('./routes/pages/index');
 var server = require('./routes/server/server');
 var app = express();
+
+//配置日志记录
+var log4js = require("./log/log.config.js");
+log4js.configure();
+app.use(log4js.useLog());
+
+
+
 //自定义配置
 app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
+    res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With,cache-control");
     res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
     res.header("X-Powered-By",' 3.2.1');
     if(req.method=="OPTIONS")
@@ -56,7 +63,11 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error.html');
+  //页面返回
+  // res.render('error.html');
+  var r={IsSuccess:false,Content:[],ErrorMessage:'请求地址不存在！'};
+  res.send(r);
+  res.end();
 });
 
 module.exports = app;
