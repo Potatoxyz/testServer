@@ -28,7 +28,8 @@ router.post('/goodCode', function (req, res, next) {
 /**
  前端必须填写和后台相对应的字段名
 */
-var upload = multer({ dest: 'uploads/' }).single('upload'); //上传单个文件 req.file
+var renamePath = path.resolve(__dirname, '../../public/images');
+var upload = multer({ dest: 'public/images/' }).single('upload'); //上传单个文件 req.file
 //var upload = multer({ dest: 'uploads/' }).array('uploadForm',5); //上传多个文件 req.files
 // var upload = multer({ dest: 'uploads/' }).fields([              //多文件上传，不同的字段名
 //     {name:"uploadForm[0]",maxCount:1},
@@ -38,7 +39,6 @@ var upload = multer({ dest: 'uploads/' }).single('upload'); //上传单个文件
 //     {name:"uploadForm[4]",maxCount:1},
 //     {name:"uploadForm[5]",maxCount:1},
 // ]); //上传多个文件 req.files
-var uploadPath = path.resolve(__dirname, '../../uploads');
 router.post('/upload', function (req, res, next) {
     upload(req, res, function (err) {
         if (err) {
@@ -51,30 +51,30 @@ router.post('/upload', function (req, res, next) {
         console.log(req.files);
         logger.info(req.file);
         logger.info(req.files);
-        var isFiled;
+        var isFiled, newPathArr;
         if (req.files) {
             isFiled = Object.keys(req.files).indexOf('uploadForm[0]') !== -1;
         }
         console.log(isFiled);
         //单文件重命名
         if (req.file && !isFiled) {
-            var newPathArr = Util.renameUploadFile(req.file, uploadPath);
+            newPathArr = Util.renameUploadFile(req.file, renamePath);
         }
         else if (isFiled) {
-            var newPathArr = [];
             for (var key in req.files) {
-                var tempPath = Util.renameUploadFile(req.files[key][0], uploadPath);
+                var tempPath = Util.renameUploadFile(req.files[key][0], renamePath);
                 newPathArr.push(tempPath);
             }
         }
         else {
-            var newPathArr = Util.renameUploadFile(req.files, uploadPath);
+            newPathArr = Util.renameUploadFile(req.files, renamePath);
         }
-        var r = { IsSuccess: true, Content: [], ErrorMessage: '' };
-        r.Content = newPathArr;
-        r.Content.push(newPathArr);
+        console.log(newPathArr);
+        // let r:resModel={IsSuccess:true,Content:[],ErrorMessage:''};
+        // r.Content=newPathArr;
         //ckeditor 图片上传iframe跨域的测试
-        // let r={"fileName":"image(7).png","uploaded":"1","error":"{}","url":"http://localhost:3001/images/image.png"};
+        var filename = Util.getFileName(req.file);
+        var r = { "fileName": "image(7).png", "uploaded": "1", "url": "http://localhost:3001/images/" + filename };
         res.send(r);
         res.status(200).end();
     });

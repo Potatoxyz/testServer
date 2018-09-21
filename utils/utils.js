@@ -25,6 +25,9 @@ var Util = {
             resultPath.push(newPath);
         }
         return resultPath;
+    },
+    getFileName: function (file) {
+        return file.originalname;
     }
 };
 module.exports = Util;
