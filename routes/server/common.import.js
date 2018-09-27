@@ -1,0 +1,20 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var response_model_1 = require("../models/response.model");
+exports.resModel = response_model_1.resModel;
+var express = require('express');
+exports.express = express;
+var multer = require('multer');
+exports.multer = multer;
+var router = express.Router();
+exports.router = router;
+var fs = require('fs');
+exports.fs = fs;
+var path = require('path');
+exports.path = path;
+var Util = require('../../utils/utils');
+exports.Util = Util;
+//使用日志
+var log4js = require('log4js');
+var logger = log4js.getLogger('cheese');
+exports.logger = logger;

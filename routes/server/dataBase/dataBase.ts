@@ -1,5 +1,4 @@
-var express = require('express');
-var router = express.Router();
+import {resModel,express,multer,router,fs,path,Util} from '../common.import.js';
 const sql = require('mssql');
 var config=require('../database.config.js');
 router.get('/',function (req, res) {
