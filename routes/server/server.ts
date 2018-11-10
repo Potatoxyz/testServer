@@ -12,6 +12,9 @@ router.post('/goodCode', function(req, res, next) {
     res.send(r);
     res.status(200).end();
 });
+//上传
+var upload=require('./upload/upload');
+router.use('/upload',upload);
 //和数据库相关的api
 var dataBase=require('./dataBase/dataBase');
 router.use('/dataBase',dataBase);

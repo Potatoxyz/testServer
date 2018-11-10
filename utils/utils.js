@@ -9,8 +9,9 @@ var Util = {
             var oldPath = uploadPath + '/' + file.filename;
             var newPath = uploadPath + '/' + file.originalname;
             fs.rename(oldPath, newPath, function (err) {
-                if (err)
+                if (err) {
                     console.error(err);
+                }
             });
             return newPath;
         };

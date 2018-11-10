@@ -14,6 +14,9 @@ common_import_js_1.router.post('/goodCode', function (req, res, next) {
     res.send(r);
     res.status(200).end();
 });
+//上传
+var upload = require('./upload/upload');
+common_import_js_1.router.use('/upload', upload);
 //和数据库相关的api
 var dataBase = require('./dataBase/dataBase');
 common_import_js_1.router.use('/dataBase', dataBase);
